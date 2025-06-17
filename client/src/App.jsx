@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter } from 'react-router-dom';
+import Router from './router';
+import { ThemeToggle } from './components/ThemeToggle';
+import { useTheme } from './hooks/useTheme';
+import './styles/globals.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { toggle } = useTheme();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <BrowserRouter>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
+        <header className="p-4 flex justify-between items-center">
+          <h1 className="text-xl font-semibold">Student Progress</h1>
+          <ThemeToggle onToggle={toggle} />
+        </header>
+        <main className="p-4">
+          <Router />
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
