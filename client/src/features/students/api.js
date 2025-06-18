@@ -1,8 +1,27 @@
+import axios from 'axios';
 import api from '../../lib/api';
 
-export const fetchStudents = () => api.get('/');
-export const getStudentById = (id) => api.get(`/${id}`);
-export const addStudent = (data) => api.post('/', data);
-export const updateStudent = (id, data) => api.put(`/${id}`, data);
-export const deleteStudent = (id) => api.delete(`/${id}`);
-export const exportCSV = () => api.get('/data/csv', { responseType: 'blob' });
+const BASE_URI = `${api.defaults.baseURL}/students`;
+
+export async function create(data) {
+    try {
+        let response = await axios.post(BASE_URI, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        console.log(response)
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export async function getAll() {
+    try {
+        let response = await axios.get(BASE_URI)
+        console.log(response)
+    } catch (err) {
+        console.log(err);
+    }
+}
