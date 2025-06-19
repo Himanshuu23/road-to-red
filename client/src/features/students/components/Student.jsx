@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteStudent, getStudentCSV, registerStudent, updateStudent } from '../slice';
+import { getAllStudents, registerStudent } from '../slice'
 
 export default function Student() {
     const name = useSelector((state) => state.student.name)
@@ -8,10 +8,8 @@ export default function Student() {
     return (
         <div>
             <div>{name}</div>
-            <button onClick={() => dispatch(registerStudent())}>add</button>
-            <button onClick={() => updateStudent()}>update</button>
-            <button onClick={() => deleteStudent()}>delete</button>
-            <button onClick={() => getStudentCSV()}>csv</button>
+            <button onClick={() => dispatch(getAllStudents())}>test get</button>
+            <button onClick={() => dispatch(registerStudent({ name: "user", emai: "email@user.com", phone: "1010101010", codeforcesHandle: "user@cf" }))}>test post</button>
         </div>
     )
 }
